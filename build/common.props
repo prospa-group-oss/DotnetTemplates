@@ -14,7 +14,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Prospa.Packaging" Version="1.0.0" PrivateAssets="All" />
-		<PackageReference Include="StyleCop.Analyzers" Version="1.0.0" PrivateAssets="All" />
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="All" />
 	</ItemGroup>
   
 </Project>
