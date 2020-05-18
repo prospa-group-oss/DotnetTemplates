@@ -24,6 +24,7 @@ See details [here](https://github.com/prospa-group/DotnetSolution)
 cd src
 dotnet new prospaapiazurensb -n "MyNew.API" 
 --keyvaultName {Keyvault name is required, don't include the environment prefix or use the DNS name. e.g. template-keyvault}
+--appDomain {Application domain name for tagging log entries}
 ```
 
 #### Attach the project to the solution
@@ -65,6 +66,7 @@ keyvaultName="mykeyvaultName" # i.e. The name provided on template creation
 az keyvault create -n $keyvaultName -g $rg -l $location
 az keyvault secret set --vault-name $keyvaultName -n "EndpointKey" --value "secret"
 az keyvault secret set --vault-name $keyvaultName -n "ConnectionStrings--ServiceBus" --value $serviceBusConnectionString
+az keyvault secret set --vault-name $keyvaultName -n "DataDogApiKey" --value "data dog key"
 ```
 
 #### NServiceBus License

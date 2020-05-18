@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ProspaWorkerNsb": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

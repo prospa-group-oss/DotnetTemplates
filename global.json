@@ -1,6 +1,7 @@
 {
-  "projects": [ "src", "test", "sandbox" ],
+  "projects": [ "src" ],
   "sdk": {
-    "version": "3.1.101"
+    "version": "3.1.101",
+    "rollForward": "latestFeature"
   }
 }

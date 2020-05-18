@@ -2,16 +2,16 @@
 using System.Threading.Tasks;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using NServiceBus;
 using NServiceBus.Json;
 using NServiceBus.Logging;
 using NServiceBus.Pipeline;
 using NServiceBus.Serilog;
 using Prospa.Extensions.Hosting;
-using V1.Commands;
 
-namespace ProspaAspNetCoreApiNsb
+// ReSharper disable CheckNamespace
+namespace Microsoft.Extensions.Hosting
+    // ReSharper restore CheckNamespace
 {
     public static class ProgramNServiceBus
     {
@@ -28,7 +28,7 @@ namespace ProspaAspNetCoreApiNsb
 
                 var connection = new ServiceBusConnectionStringBuilder(connectionString);
 
-                var endpointName = GetEndpointName();
+                var endpointName = GetEndpointName(context.HostingEnvironment);
                 var cfg = new EndpointConfiguration(endpointName);
 
                 cfg.License(context.Configuration.GetValue<string>(ProspaConstants.SharedConfigurationKeys.NServiceBusLicense));
@@ -49,8 +49,7 @@ namespace ProspaAspNetCoreApiNsb
                 var transport = cfg.UseTransport<AzureServiceBusTransport>();
                 transport.ConnectionString(connection.ToString);
 
-                var routing = transport.Routing();
-                RouteSampleCommands(routing);
+                transport.Routing();
 
                 LogManager.Use<SerilogFactory>();
                 var serilog = cfg.EnableSerilogTracing();
@@ -61,27 +60,15 @@ namespace ProspaAspNetCoreApiNsb
             });
         }
 
-        private static string GetEndpointName()
+        private static string GetEndpointName(IHostEnvironment hostEnvironment)
         {
-            var endpointName = "prospaaspnetcoreapinsb";
-            if (ProspaConstants.Environments.IsDevelopment)
+            var endpointName = "prospaworkernsb";
+            if (hostEnvironment.IsDevelopment())
             {
-                endpointName = $"prospaaspnetcoreapinsb.{Environment.MachineName.ToLower()}";
+                endpointName = $"prospaworkernsb.{Environment.MachineName.ToLower()}";
             }
 
             return endpointName;
-        }
-
-        private static void RouteSampleCommands(RoutingSettings<AzureServiceBusTransport> routing)
-        {
-            var endpointName = "prospaworkernsb";
-
-            if (ProspaConstants.Environments.IsDevelopment)
-            {
-                endpointName += $".{Environment.MachineName.ToLower()}";
-            }
-
-            routing.RouteToEndpoint(typeof(SampleCommand), endpointName);
         }
     }
 }

@@ -1,22 +1,21 @@
 ﻿using System;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Prospa.Extensions.AspNetCore.Mvc.Core.StartupFilters;
 using Serilog;
 
 namespace ProspaAspNetCoreApi
 {
-    public partial class Program
+    public sealed class Program
     {
         public static int Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
+            var webHost = CreateHostBuilder(args).Build();
 
             try
             {
-                host.Run();
+                webHost.Run();
+
                 return 0;
             }
             catch (Exception ex)
@@ -30,25 +29,24 @@ namespace ProspaAspNetCoreApi
             }
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((context, builder) =>
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((context, builder) => { builder.AddDefaultKeyvault(); })
+                .ConfigureServices((context, services) =>
                 {
-                    builder.AddDefaultSources(args);
+                    services.AddProspaMetaEndpointProtection(context, Constants.HealthEndpoint);
                 })
-                .UseSerilog(ConfigureLogger)
+                .UseSerilog((context, configuration) =>
+                {
+                    context.CreateProspaDefaultLogger(configuration, typeof(Program));
+                })
                 .ConfigureWebHostDefaults(webHostBuilder =>
                 {
                     webHostBuilder
                         .ConfigureKestrel(options => { options.AddServerHeader = false; })
-                        .ConfigureServices((context, services) =>
-                        {
-                            services.AddSingleton<IStartupFilter>(
-                                new RequireEndpointKeyStartupFilter(
-                                    new[] { "/health", "/metrics", "/metrics-text", "/env", "/docs" },
-                                context.Configuration.GetValue<string>(Constants.Auth.EndpointKey)));
-                        })
                         .UseStartup<Startup>();
                 });
+        }
     }
 }

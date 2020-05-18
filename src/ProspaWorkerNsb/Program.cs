@@ -5,7 +5,7 @@ using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
-namespace ProspaWorker
+namespace ProspaWorkerNsb
 {
     public class Program
     {
@@ -20,6 +20,7 @@ namespace ProspaWorker
                     {
                         context.CreateProspaDefaultLogger(configuration, typeof(Program));
                     })
+                    .UseDefaultNServiceBus()
                     .ConfigureServices(Startup.ConfigureServices)
                     .UseConsoleLifetime()
                     .Build();

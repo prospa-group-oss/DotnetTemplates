@@ -1,7 +1,7 @@
-﻿using HealthChecks.UI.Client;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
+using Prospa.Extensions.AspNetCore.Hosting;
 using ProspaAspNetCoreApi.Application.HealthChecks;
 
 namespace ProspaAspNetCoreApi
@@ -10,10 +10,9 @@ namespace ProspaAspNetCoreApi
     {
         public static IApplicationBuilder UseDefaultHealth(this IApplicationBuilder builder)
         {
-            builder.UseHealthChecks("/health", new HealthCheckOptions
-            {
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            });
+            builder.UseHealthChecks(
+                Constants.HealthEndpoint,
+                new HealthCheckOptions { ResponseWriter = ProspaConstants.WriteHealthResponse });
 
             return builder;
         }
@@ -22,8 +21,6 @@ namespace ProspaAspNetCoreApi
         {
             services.AddHealthChecks()
                 .AddCheck<SampleHealthCheck>("sample_health_check");
-
-            services.AddHealthChecksUI();
 
             return services;
         }

@@ -6,16 +6,16 @@
     "Background",
     "Job"
   ],
-  "name": "Prospa Worker",
-  "identity": "Prospa.Worker",
-  "shortName": "prospaworker",
+  "name": "Prospa Worker - NServiceBus",
+  "identity": "Prospa.Worker.Nsb",
+  "shortName": "prospaworkernsb",
   "tags": {
     "language": "C#",
     "type": "project"
   },
   "preferNameDirectory": true,
-  "sourceName": "ProspaWorker",
-  "primaryOutputs": [ { "path": "ProspaWorker.csproj" } ],
+  "sourceName": "ProspaWorkerNsb",
+  "primaryOutputs": [ { "path": "ProspaWorkerNsb.csproj" } ],
   "symbols": {
     "appDomain": {
       "type": "parameter",

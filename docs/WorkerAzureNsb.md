@@ -1,17 +1,11 @@
-### AspNetCore API - Azure
+### Worker - Azure - NServiceBus
 
-This template scaffolds an ASP.NET core API which standardises the following:
-- A health checks where the status is provided at `/health?EndpointKey=your-secret`
-- A a ping endpoint at `/ping`
-- OAuth2 for authorization
-- Swagger for API documentation
+This template scaffolds a NServiceBus endpoint worker which standardises the following:
+
 - Azure Application Insights for application traces and telemtry
-- [Problem+Json](https://tools.ietf.org/html/rfc7807) for error responses
-- API versioning via URLs
 - Azure Keyvault for storing application secrets
-- OWASP recommended security headers
-- Request details logging on failed requests, including the ability to scrub sensitive request headers such as `Authorization` 
-- Log Enrichment middleware providing structured log entries which includes entries such `CorrelationId`, `ClientId`, `SubjectId`
+- Log configuration and enrichment with optional Datadog integration
+- NServiceBus Endpoint Configuration
 
 #### Create a new solution to add the project template to:
 
@@ -21,7 +15,7 @@ See details [here](https://github.com/prospa-group/DotnetSolution)
 
 ```console
 cd src
-dotnet new prospaapiazure -n "MyNew.API" 
+dotnet new prospaworkersnb -n "MyNew.Worker" 
 --keyvaultName {Keyvault name is required, don't include the environment prefix or use the DNS name. e.g. template-keyvault}
 --appDomain {Application domain name for tagging log entries}
 ```
@@ -30,7 +24,7 @@ dotnet new prospaapiazure -n "MyNew.API"
 
 ```console
 cd ..
-dotnet sln add .\src\MyNew.API\MyNew.API.csproj
+dotnet sln add .\src\MyNew.Worker\MyNew.Worker.csproj
 ```
 
 #### Configure Azure Keyvault
@@ -45,5 +39,5 @@ keyvaultName="keyvaultName"
 az group create -l australiaeast -n $rg
 az keyvault create -n $keyvaultName -g $rg -l australiaeast
 az keyvault secret set --vault-name $keyvaultName -n "EndpointKey" --value "secret"
-az keyvault secret set --vault-name $keyvaultName -n "DataDogApiKey" --value "data dog key"
+az keyvault secret set --vault-name $keyvaultName -n "DataDogApiKey" --value "DataDog api key"
 ```
