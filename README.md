@@ -15,7 +15,7 @@ Confirm templates are installed:
 
 ```console
 dotnet new list
-``` 
+```
 
 ## Project Templates Included
 
@@ -24,6 +24,7 @@ dotnet new list
 |[prospaapiazure](docs/AspNetCoreApiAzure.md)|An ASP.NET Core Api targetted at hosting on Azure|
 |[prospaapiazurensb](docs/AspNetCoreApiAzureNsb.md)|An ASP.NET Core Api with NServiceBus integration targetted at hosting on Azure|
 |[prospaworker](docs/WorkerAzure.md)|A worker targetted at hosting on Azure|
+|[prospaworkernsb](docs/WorkerAzureNsb.md)|A worker hosting an NServiceBus endpoint|
 
 ## How to Build
 

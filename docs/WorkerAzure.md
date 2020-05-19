@@ -15,6 +15,7 @@ See details [here](https://github.com/prospa-group/DotnetSolution)
 cd src
 dotnet new prospaworker -n "MyNew.Worker" 
 --keyvaultName {Keyvault name is required, don't include the environment prefix or use the DNS name. e.g. template-keyvault}
+--appDomain {Application domain name for tagging log entries}
 ```
 
 #### Attach the project to the solution
@@ -36,4 +37,5 @@ keyvaultName="keyvaultName"
 az group create -l australiaeast -n $rg
 az keyvault create -n $keyvaultName -g $rg -l australiaeast
 az keyvault secret set --vault-name $keyvaultName -n "EndpointKey" --value "secret"
+az keyvault secret set --vault-name $keyvaultName -n "DataDogApiKey" --value "DataDog api key"
 ```
