@@ -31,7 +31,7 @@ namespace Microsoft.Extensions.Hosting
                 var endpointName = GetEndpointName(context.HostingEnvironment);
                 var cfg = new EndpointConfiguration(endpointName);
 
-                cfg.License(context.Configuration.GetValue<string>(ProspaConstants.SharedConfigurationKeys.NServiceBusLicense));
+                cfg.License(context.Configuration.GetNServiceBusLicense());
                 cfg.SendFailedMessagesTo("error");
                 cfg.AuditProcessedMessagesTo("audit");
                 cfg.EnableInstallers();

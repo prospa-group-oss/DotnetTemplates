@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 using Prospa.Extensions.AspNetCore.Hosting;
+using Prospa.Extensions.Hosting;
 using ProspaAspNetCoreApi.Application.HealthChecks;
 
 namespace ProspaAspNetCoreApi

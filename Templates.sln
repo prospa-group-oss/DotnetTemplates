@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution items", "_solutio
 		Prospa.ruleset = Prospa.ruleset
 		README.md = README.md
 		stylecop.json = stylecop.json
+		NuGet.config = NuGet.config
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5BAD8595-FB2F-43E9-ADC9-3BE4169C996C}"
