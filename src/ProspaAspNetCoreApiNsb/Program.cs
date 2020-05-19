@@ -35,9 +35,8 @@ namespace ProspaAspNetCoreApiNsb
             return Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((context, builder) =>
                 {
-                    builder.AddDefaultKeyvault();
-                    builder.AddSharedKeyvault();
                     builder.AddSharedAppConfiguration();
+                    builder.AddDefaultKeyvault();
                 })
                 .ConfigureServices((context, services) =>
                 {

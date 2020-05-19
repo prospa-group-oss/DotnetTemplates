@@ -17,9 +17,8 @@ namespace ProspaWorkerNsb
             hostBuilder.ConfigureAppConfiguration(
                 (context, builder) =>
                 {
-                    AddDefaultAzureKeyVault(builder, context.HostingEnvironment);
-                    builder.AddSharedKeyvault();
                     builder.AddSharedAppConfiguration();
+                    AddDefaultAzureKeyVault(builder, context.HostingEnvironment);
                 });
 
             return hostBuilder;
