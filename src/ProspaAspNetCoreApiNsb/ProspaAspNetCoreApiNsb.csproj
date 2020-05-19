@@ -17,7 +17,7 @@
 
     <ItemGroup Label="Third Party Package References">
         <PackageReference Include="NServiceBus" Version="7.2.2" />
-        <PackageReference Include="NServiceBus.Extensions.Hosting" Version="1.0.0" />
+        <PackageReference Include="NServiceBus.Extensions.Hosting" Version="1.0.1" />
         <PackageReference Include="NServiceBus.MSDependencyInjection" Version="0.1.4" />
         <PackageReference Include="NServiceBus.Json" Version="1.0.3" />
         <PackageReference Include="NServiceBus.Serilog" Version="7.0.0" />
