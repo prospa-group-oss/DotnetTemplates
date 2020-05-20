@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -36,7 +35,6 @@ namespace ProspaAspNetCoreApiNsb
                 .ConfigureAppConfiguration((context, builder) =>
                 {
                     builder.AddSharedAppConfiguration();
-                    builder.AddDefaultKeyvault();
                 })
                 .ConfigureServices((context, services) =>
                 {

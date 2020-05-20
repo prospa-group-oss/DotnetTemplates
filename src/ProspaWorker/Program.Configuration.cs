@@ -1,69 +1,39 @@
 ﻿using System;
 using System.Reflection;
-using Microsoft.Azure.KeyVault;
-using Microsoft.Azure.Services.AppAuthentication;
+using Azure.Core;
+using Azure.Identity;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.AzureKeyVault;
 using Microsoft.Extensions.Hosting;
+using Prospa.Extensions.Hosting;
 
 namespace ProspaWorker
 {
     public static class ProgramConfiguration
     {
-        public static IHostBuilder ConfigureDefaultAppConfiguration(this IHostBuilder hostBuilder)
+        public static void AddSharedAppConfiguration(this IConfigurationBuilder builder)
         {
-            if (hostBuilder == null)
+            var config = builder.Build();
+            var appConfigEndpoint =
+                config.GetValue<string>(ProspaConstants.SharedConfigurationKeys.SharedAzureAppConfigurationEndpoint);
+
+            if (string.IsNullOrWhiteSpace(appConfigEndpoint))
             {
-                throw new ArgumentNullException(nameof(hostBuilder));
+                throw new Exception(
+                    $"Missing App Configuration, Key: {ProspaConstants.SharedConfigurationKeys.SharedAzureAppConfigurationEndpoint}");
             }
 
-            hostBuilder.ConfigureAppConfiguration(
-                (context, config) =>
+            var credentials = ProspaConstants.Environments.IsDevelopment
+                ? new DefaultAzureCredential()
+                : (TokenCredential)new ManagedIdentityCredential();
+
+            builder.AddAzureAppConfiguration(
+                options =>
                 {
-                    config.AddDefaultSources(context);
+                    options.Connect(new Uri(appConfigEndpoint), credentials);
+                    options.ConfigureKeyVault(kv => kv.SetCredential(credentials));
+                    options.Select("SHARED:*");
+                    options.TrimKeyPrefix("SHARED:");
                 });
-
-            return hostBuilder;
-        }
-
-        public static IConfigurationBuilder AddDefaultSources(
-            this IConfigurationBuilder builder,
-            HostBuilderContext context)
-        {
-            if (builder == null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
-
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            if (context.HostingEnvironment.IsDevelopment())
-            {
-                builder.AddUserSecrets(Assembly.GetExecutingAssembly());
-            }
-            else
-            {
-                AddDefaultAzureKeyVault(builder, context.HostingEnvironment);
-            }
-
-            return builder;
-        }
-
-        private static void AddDefaultAzureKeyVault(IConfigurationBuilder builder, IHostEnvironment hostEnvironment)
-        {
-            var builtConfig = builder.Build();
-            var keyVaultName = builtConfig.GetValue<string>("keyVaultName");
-
-            if (keyVaultName == null)
-            {
-                return;
-            }
-
-            var keyVaultEndpoint = $"https://{Constants.Environment.Prefix(hostEnvironment)}{keyVaultName}.vault.azure.net/";
-            builder.AddAzureKeyVault(keyVaultEndpoint);
         }
     }
 }

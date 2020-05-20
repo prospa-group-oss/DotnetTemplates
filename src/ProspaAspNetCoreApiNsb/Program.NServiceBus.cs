@@ -19,7 +19,7 @@ namespace ProspaAspNetCoreApiNsb
         {
             return builder.UseNServiceBus(context =>
             {
-                var connectionString = context.Configuration.SharedAzureServiceBusConnection();
+                var connectionString = context.Configuration.AzureServiceBusConnection();
 
                 if (string.IsNullOrWhiteSpace(connectionString))
                 {

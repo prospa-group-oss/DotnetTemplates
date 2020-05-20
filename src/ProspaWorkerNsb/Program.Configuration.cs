@@ -1,41 +1,37 @@
 ﻿using System;
-using System.Reflection;
+using Azure.Core;
+using Azure.Identity;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
+using Prospa.Extensions.Hosting;
 
 namespace ProspaWorkerNsb
 {
     public static class ProgramConfiguration
     {
-        public static IHostBuilder ConfigureDefaultAppConfiguration(this IHostBuilder hostBuilder)
+        public static void AddSharedAppConfiguration(this IConfigurationBuilder builder)
         {
-            if (hostBuilder == null)
+            var config = builder.Build();
+            var appConfigEndpoint =
+                config.GetValue<string>(ProspaConstants.SharedConfigurationKeys.SharedAzureAppConfigurationEndpoint);
+
+            if (string.IsNullOrWhiteSpace(appConfigEndpoint))
             {
-                throw new ArgumentNullException(nameof(hostBuilder));
+                throw new Exception(
+                    $"Missing App Configuration, Key: {ProspaConstants.SharedConfigurationKeys.SharedAzureAppConfigurationEndpoint}");
             }
 
-            hostBuilder.ConfigureAppConfiguration(
-                (context, builder) =>
+            var credentials = ProspaConstants.Environments.IsDevelopment
+                ? new DefaultAzureCredential()
+                : (TokenCredential)new ManagedIdentityCredential();
+
+            builder.AddAzureAppConfiguration(
+                options =>
                 {
-                    builder.AddSharedAppConfiguration();
-                    AddDefaultAzureKeyVault(builder, context.HostingEnvironment);
+                    options.Connect(new Uri(appConfigEndpoint), credentials);
+                    options.ConfigureKeyVault(kv => kv.SetCredential(credentials));
+                    options.Select("SHARED:*");
+                    options.TrimKeyPrefix("SHARED:");
                 });
-
-            return hostBuilder;
-        }
-
-        private static void AddDefaultAzureKeyVault(IConfigurationBuilder builder, IHostEnvironment hostEnvironment)
-        {
-            var builtConfig = builder.Build();
-            var keyVaultName = builtConfig.GetValue<string>("keyVaultName");
-
-            if (keyVaultName == null)
-            {
-                return;
-            }
-
-            var keyVaultEndpoint = $"https://{ProspaWorker.Constants.Environment.Prefix(hostEnvironment)}{keyVaultName}.vault.azure.net/";
-            builder.AddAzureKeyVault(keyVaultEndpoint);
         }
     }
 }
