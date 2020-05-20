@@ -15,7 +15,10 @@ namespace ProspaWorker
             {
                 var host = Host
                     .CreateDefaultBuilder(args)
-                    .ConfigureDefaultAppConfiguration()
+                    .ConfigureAppConfiguration((context, config) =>
+                    {
+                        config.AddSharedAppConfiguration();
+                    })
                     .UseSerilog((context, configuration) =>
                     {
                         context.CreateProspaDefaultLogger(configuration, typeof(Program));

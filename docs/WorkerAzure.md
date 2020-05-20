@@ -25,17 +25,6 @@ cd ..
 dotnet sln add .\src\MyNew.Worker\MyNew.Worker.csproj
 ```
 
-#### Configure Azure Keyvault
+#### Configure App Configuration
 
-The template is configured to add Azure Keyvault as a configuration provider. You'll need to create the KeyVault resource for the application and use MSI to connect.
-
-Install the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) and then run `az login`
-
-```
-rg="demo-mygroupname-rg"
-keyvaultName="keyvaultName"
-az group create -l australiaeast -n $rg
-az keyvault create -n $keyvaultName -g $rg -l australiaeast
-az keyvault secret set --vault-name $keyvaultName -n "EndpointKey" --value "secret"
-az keyvault secret set --vault-name $keyvaultName -n "DataDogApiKey" --value "DataDog api key"
-```
+The template is configured to add Azure App Configuration as a configuration provider. You'll need add the endpoints to appsettings i.e. add the Azure App Configuration URL setting the `SharedAzureAppConfigurationEndpoint` value in appsettings.
