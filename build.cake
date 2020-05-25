@@ -6,7 +6,7 @@ var configuration   = Argument<string>("configuration", "Release");
 ///////////////////////////////////////////////////////////////////////////////
 var buildArtifacts      = Directory("./artifacts/packages");
 var feedDirectory       = Directory("./feed/content");
-var packageVersion      = "3.6.0";
+var packageVersion      = "3.7.0";
 
 ///////////////////////////////////////////////////////////////////////////////
 // Clean
