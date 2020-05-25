@@ -29,7 +29,7 @@ namespace ProspaAspNetCoreApiNsb.Controllers.V1
             return Ok("sample");
         }
 
-        [Authorize(Constants.Auth.Policies.WritePolicy)]
+        // [Authorize(Constants.Auth.Policies.WritePolicy)]
         [HttpPut]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
         public ActionResult Put()

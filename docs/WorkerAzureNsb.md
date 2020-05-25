@@ -1,9 +1,11 @@
-### Worker - Azure
+### Worker - Azure - NServiceBus
 
-This template scaffolds a worker which standardises the following:
+This template scaffolds a NServiceBus endpoint worker which standardises the following:
+
 - Azure Application Insights for application traces and telemtry
 - Azure Keyvault for storing application secrets
 - Log configuration and enrichment with optional Datadog integration
+- NServiceBus Endpoint Configuration
 
 #### Create a new solution to add the project template to:
 
@@ -13,7 +15,7 @@ See details [here](https://github.com/prospa-group/DotnetSolution)
 
 ```console
 cd src
-dotnet new prospaworker -n "MyNew.Worker"
+dotnet new prospaworkernsb -n "MyNew.Worker"
 --appDomain {Application domain name for tagging log entries}
 ```
 
@@ -23,7 +25,6 @@ dotnet new prospaworker -n "MyNew.Worker"
 cd ..
 dotnet sln add .\src\MyNew.Worker\MyNew.Worker.csproj
 ```
-
 #### Configure App Configuration
 
 The template is configured to add Azure App Configuration as a configuration provider. You'll need add the endpoints to appsettings i.e. add the Azure App Configuration URL setting the `SharedAzureAppConfigurationEndpoint` value in appsettings.

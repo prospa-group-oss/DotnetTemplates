@@ -1,47 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <Import Project="..\..\build\common.props" />
+    <Import Project="..\..\build\common.props" />
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Description>ProspaAspNetCoreApi</Description>
-    <PackageTags>prospa;aspnetcore;api</PackageTags>
-    <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <Description>ProspaAspNetCoreApi</Description>
+        <PackageTags>prospa;aspnetcore;api</PackageTags>
+        <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
+        <LangVersion>Latest</LangVersion>
+    </PropertyGroup>
 
-  <ItemGroup Label="Microsoft Package References">
-    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version=" 2.13.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="3.1.2" />
-  </ItemGroup>
+    <ItemGroup Label="Prospa Package References">
+        <PackageReference Include="Prospa.Extensions.AspNetCore.Hosting" Version="2.2.0" />
+    </ItemGroup>
 
-  <ItemGroup Label="Third Party Package References">
-      <PackageReference Include="AspNetCore.HealthChecks.UI" Version="3.0.9" />
-      <PackageReference Include="CorrelationId" Version="2.1.0" />
-      <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.1" />
-      <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="3.0.0" />
-      <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
-      <PackageReference Include="Serilog.Filters.Expressions" Version="2.1.0" />
-      <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
-      <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" />
-      <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
-      <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
-      <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
-      <PackageReference Include="SerilogAnalyzer" Version="0.15.0" />
-  </ItemGroup>
-
-  <ItemGroup Label="Prospa Package References">
-      <PackageReference Include="Prospa.Extensions.ApplicationInsights" Version="2.2.0-*" />
-      <PackageReference Include="Prospa.Extensions.AspNetCore.Authorization" Version="2.2.0-*" />
-      <PackageReference Include="Prospa.Extensions.AspNetCore.Serilog" Version="2.2.0-*" />
-      <PackageReference Include="Prospa.Extensions.AspNetCore.Mvc.Versioning.Swagger" Version="2.2.0-*" />
-      <PackageReference Include="Prospa.Extensions.AspNetCore.Swagger" Version="2.2.0-*" />
-      <PackageReference Include="Prospa.Extensions.Serilog" Version="2.2.0-*" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="StyleCop.Analyzers" Version="1.1.118" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Update="StyleCop.Analyzers" Version="1.1.118" />
+    </ItemGroup>
 
 </Project>

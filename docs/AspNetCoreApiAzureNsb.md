@@ -22,8 +22,8 @@ See details [here](https://github.com/prospa-group/DotnetSolution)
 
 ```console
 cd src
-dotnet new prospaapiazurensb -n "MyNew.API" 
---keyvaultName {Keyvault name is required, don't include the environment prefix or use the DNS name. e.g. template-keyvault}
+dotnet new prospaapiazurensb -n "MyNew.API"
+--appDomain {Application domain name for tagging log entries}
 ```
 
 #### Attach the project to the solution
@@ -56,17 +56,6 @@ az servicebus namespace create --resource-group $rg --name "demo-myservicebusnam
 serviceBusConnectionString=$(az servicebus namespace authorization-rule keys list -g $rg --namespace-name $namespaceName --name RootManageSharedAccessKey --query primaryConnectionString --output tsv)
 ```
 
-#### Configure Azure Keyvault
+#### Configure App Configuration
 
-The template is configured to add Azure Keyvault as a configuration provider. You'll need to create the KeyVault resource for the application and use MSI to connect.
-
-```
-keyvaultName="mykeyvaultName" # i.e. The name provided on template creation
-az keyvault create -n $keyvaultName -g $rg -l $location
-az keyvault secret set --vault-name $keyvaultName -n "EndpointKey" --value "secret"
-az keyvault secret set --vault-name $keyvaultName -n "ConnectionStrings--ServiceBus" --value $serviceBusConnectionString
-```
-
-#### NServiceBus License
-
-Add the NServiceBus License to the root of the solution and add it as a linked item to the projected created.
+The template is configured to add Azure App Configuration as a configuration provider. You'll need add the endpoints to appsettings i.e. add the Azure App Configuration URL setting the `SharedAzureAppConfigurationEndpoint` value in appsettings.

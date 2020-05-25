@@ -5,7 +5,7 @@ using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
-namespace ProspaWorker
+namespace ProspaWorkerNsb
 {
     public class Program
     {
@@ -15,14 +15,15 @@ namespace ProspaWorker
             {
                 var host = Host
                     .CreateDefaultBuilder(args)
-                    .ConfigureAppConfiguration((context, config) =>
+                    .ConfigureAppConfiguration((context, builder) =>
                     {
-                        config.AddSharedAppConfiguration();
+                        builder.AddSharedAppConfiguration();
                     })
                     .UseSerilog((context, configuration) =>
                     {
                         context.CreateProspaDefaultLogger(configuration, typeof(Program));
                     })
+                    .UseDefaultNServiceBus()
                     .ConfigureServices(Startup.ConfigureServices)
                     .UseConsoleLifetime()
                     .Build();

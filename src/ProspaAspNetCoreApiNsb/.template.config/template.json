@@ -16,10 +16,10 @@
   "sourceName": "ProspaAspNetCoreApiNsb",
   "primaryOutputs": [ { "path": "ProspaAspNetCoreApiNsb.csproj" } ],
   "symbols": {
-    "keyvaultName": {
+    "appDomain": {
       "type": "parameter",
-      "replaces": "(keyvaultName)",
-      "description": "Keyvault name is required, don't include the environment prefix or use the DNS name. e.g. template-keyvault",
+      "replaces": "(appDomain)",
+      "description": "The Application Domain name used for tagging logs",
       "dataType": "string",
       "isRequired": true
     }
