@@ -22,7 +22,7 @@ namespace ProspaAspNetCoreApiNsb
         {
             app.UseRequireHttps()
                 .UseDefaultHealth()
-                .UseCorrelationId(new CorrelationIdOptions { UpdateTraceIdentifier = false })
+                .UseCorrelationId()
                 .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.All })
                 .UseProspaDefaultDiagnostics(_hostingEnvironment)
                 .UseProspaDefaultSwagger();
