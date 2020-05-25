@@ -13,8 +13,7 @@ See details [here](https://github.com/prospa-group/DotnetSolution)
 
 ```console
 cd src
-dotnet new prospaworker -n "MyNew.Worker" 
---keyvaultName {Keyvault name is required, don't include the environment prefix or use the DNS name. e.g. template-keyvault}
+dotnet new prospaworker -n "MyNew.Worker"
 --appDomain {Application domain name for tagging log entries}
 ```
 
