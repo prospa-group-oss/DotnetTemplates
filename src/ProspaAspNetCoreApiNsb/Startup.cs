@@ -38,7 +38,6 @@ namespace ProspaAspNetCoreApiNsb
             services.AddMvcCore()
                 .AddProspaDefaultFluentValidation(typeof(Startup))
                 .AddApiExplorer()
-                .AddAuthorization()
                 .AddDataAnnotations();
 
             services.AddRouting(options => options.LowercaseUrls = true);
