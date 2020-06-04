@@ -22,8 +22,8 @@
     </ItemGroup>
 
     <ItemGroup Label="Prospa Package References">
-        <PackageReference Include="Prospa.Extensions.Hosting" Version="2.2.0"/>
-        <PackageReference Include="Prospa.Extensions.Serilog" Version="2.2.0"/>
-        <PackageReference Include="Prospa.Extensions.Diagnostics.DDPublisher" Version="2.2.0" />
+        <PackageReference Include="Prospa.Extensions.Hosting" Version="2.3.0-*"/>
+        <PackageReference Include="Prospa.Extensions.Serilog" Version="2.3.0-*"/>
+        <PackageReference Include="Prospa.Extensions.Diagnostics.DDPublisher" Version="2.3.0-*" />
     </ItemGroup>
 </Project>
