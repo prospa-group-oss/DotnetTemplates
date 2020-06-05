@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup Label="Third Party Package References">
+        <PackageReference Include="AspNetCore.HealthChecks.Publisher.ApplicationInsights" Version="3.0.4" />
         <PackageReference Include="NServiceBus" Version="7.3.0" />
         <PackageReference Include="NServiceBus.Extensions.Hosting" Version="1.0.1" />
         <PackageReference Include="NServiceBus.MSDependencyInjection" Version="0.1.4" />
@@ -29,5 +30,6 @@
         <PackageReference Include="Prospa.Extensions.Hosting" Version="2.3.0-*" />
         <PackageReference Include="Prospa.Extensions.NServiceBus" Version="2.3.0-*" />
         <PackageReference Include="Prospa.Extensions.Serilog" Version="2.3.0-*" />
+        <PackageReference Include="Prospa.Extensions.Diagnostics.DDPublisher" Version="2.3.0-*" />
     </ItemGroup>
 </Project>
