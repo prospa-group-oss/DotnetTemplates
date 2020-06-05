@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Prospa.Extensions.Diagnostics.DDPublisher;
 
-namespace ProspaWorker
+namespace ProspaWorkerNsb
 {
     public static class StartupHealthCheck
     {

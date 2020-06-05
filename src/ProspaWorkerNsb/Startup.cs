@@ -18,6 +18,7 @@ namespace ProspaWorkerNsb
                 throw new ArgumentNullException(nameof(services));
             }
 
+            services.SetupHealthCheck(context);
             services.AddApplicationInsightsTelemetryWorkerService();
         }
     }
