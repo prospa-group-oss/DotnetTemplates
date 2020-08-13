@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Prospa.Extensions.Diagnostics.DDPublisher;
+using Prospa.Extensions.Hosting;
 
 namespace ProspaWorker
 {
@@ -21,16 +22,13 @@ namespace ProspaWorker
             {
                 healthCheckBuilder.AddDatadogPublisher(configuration =>
                 {
+                    configuration.Domain = appDomain;
+                    configuration.Application = typeof(Program).Assembly.GetName().Name;
+                    configuration.Environment = ProspaConstants.Environments.CurrentEnv;
                     configuration.ServiceCheckName = typeof(Program).Assembly.GetName().Name;
                     configuration.ApiKey = dataDogApiKey;
                     configuration.ApplicationKey = dataDogAppKey;
                     configuration.Url = "https://api.datadoghq.com/api";
-                    configuration.DefaultTags = new[]
-                    {
-                        $"env:{context.HostingEnvironment.EnvironmentName}",
-                        $"p3domain:{appDomain}",
-                        "p3app:<<app-name>>"
-                    };
                 });
             }
 

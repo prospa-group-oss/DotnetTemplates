@@ -11,8 +11,8 @@
     </PropertyGroup>
 
     <ItemGroup Label="Prospa Package References">
-        <PackageReference Include="Prospa.Extensions.AspNetCore.Hosting" Version="2.3.0-*" />
-        <PackageReference Include="Prospa.Extensions.NServiceBus" Version="2.3.0-*" />
+        <PackageReference Include="Prospa.Extensions.AspNetCore.Hosting" Version="3.0.0-*" />
+        <PackageReference Include="Prospa.Extensions.NServiceBus" Version="3.0.0-*" />
     </ItemGroup>
 
     <ItemGroup Label="Third Party Package References">
