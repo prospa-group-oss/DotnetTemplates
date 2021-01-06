@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup Label="Third Party Package References">
-        <PackageReference Include="AspNetCore.HealthChecks.Publisher.ApplicationInsights" Version="3.0.4" />
+        <PackageReference Include="AspNetCore.HealthChecks.Publisher.ApplicationInsights" Version="5.0.1" />
         <PackageReference Include="NServiceBus" Version="7.3.0" />
         <PackageReference Include="NServiceBus.Extensions.Hosting" Version="1.0.1" />
         <PackageReference Include="NServiceBus.MSDependencyInjection" Version="0.1.4" />
