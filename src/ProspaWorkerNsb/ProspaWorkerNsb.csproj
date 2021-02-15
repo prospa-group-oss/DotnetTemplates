@@ -23,7 +23,7 @@
         <PackageReference Include="NServiceBus.Json" Version="1.0.3" />
         <PackageReference Include="NServiceBus.Serilog" Version="7.1.0" />
         <PackageReference Include="NServiceBus.Transport.AzureServiceBus" Version="1.5.0" />
-        <PackageReference Include="Serilog.Extensions.Hosting" Version="3.0.0" />
+        <PackageReference Include="Serilog.Extensions.Hosting" Version="4.0.0" />
     </ItemGroup>
 
     <ItemGroup Label="Prospa Package References">
