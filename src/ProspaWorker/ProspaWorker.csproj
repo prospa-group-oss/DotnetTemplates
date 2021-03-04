@@ -17,7 +17,7 @@
 
     <ItemGroup Label="Third Party Package References">
         <PackageReference Include="AspNetCore.HealthChecks.Publisher.ApplicationInsights" Version="3.0.4" />
-        <PackageReference Include="Serilog.Extensions.Hosting" Version="3.0.0"/>
+        <PackageReference Include="Serilog.Extensions.Hosting" Version="4.1.2"/>
     </ItemGroup>
 
     <ItemGroup Label="Prospa Package References">
